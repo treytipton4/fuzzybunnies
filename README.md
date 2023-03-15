@@ -1,5 +1,5 @@
 # fuzzybunnies
-Creating an R Package as a group
-Can you see this?
 
-Trey Tipton
+Creating an R Package as a group
+
+Trey Tipton, Trevor VanVeldhuisen, and Brent Gin
