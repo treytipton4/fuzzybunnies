@@ -1,7 +1,16 @@
-x <- c(1, 2, 3)
-y <- c(4, 5, 6)
-z <- c(x, y)
+Name <- c("Jon", "Bill", "Maria", "Ben", "Tina")
+Age <- c(23, 41, 32, 58, 26)
+df <- data.frame(Name, Age)
 
-test_that("df_apply works", {
-  expect_equal(df_apply(z, mean, z[1]), c(2, 5))
+Name <- c("Jon", "Bill", "Maria", "Ben", "Tina")
+Age <- c(28, 46, 37, 63, 31)
+df2 <- data.frame(Name, Age)
+
+increment <- function(x) {
+  x <- x + 5
+}
+
+test_that("dataset is modified", {
+  expect_equal(df_apply(df, increment, is.numeric), df2)
 })
+#test
