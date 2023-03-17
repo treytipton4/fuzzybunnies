@@ -1,13 +1,11 @@
 Package: fuzzybunnies
 Title: Contains a Function for Working with Dataframes in R
 Version: 0.0.0.9000
-Authors@R: 
-    person("Trey", "Tipton", , "tct5@calvin.edu", role = c("aut", "cre")),
-           person("Trevor", "VanVeldhuisen", , "tsv9@calvin.edu", role = c("aut", "cre")),
-           person("Brent", "Gin", , "bg32@calvin.edu", role = c("aut", "cre")),
+Authors@R: c(person("Trey", "Tipton", , "tct5@calvin.edu", role = c("aut", "cre")),
+           person("Trevor", "VanVeldhuisen", , "tsv9@calvin.edu", role = "aut"),
+           person("Brent", "Gin", , "bg32@calvin.edu", role = "aut"))
 Description: This package contains a df_apply function that will expect a dataframe and a function and make modifications to the dataframe based one those inputs.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
