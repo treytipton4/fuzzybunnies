@@ -11,4 +11,5 @@ df_apply <- function(.data, .fun, .filter) {
     if (.filter(.data[i]))
       .data[i] <- .fun(.data[i])
   }
+  return(.data)
 }
