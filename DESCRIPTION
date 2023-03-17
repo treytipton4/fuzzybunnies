@@ -1,10 +1,12 @@
 Package: fuzzybunnies
-Title: What the Package Does (One Line, Title Case)
+Title: Contains a Function for Working with Dataframes in R
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person("Trey", "Tipton", , "tct5@calvin.edu", role = c("aut", "cre")),
+           person("Trevor", "VanVeldhuisen", , "tsv9@calvin.edu", role = c("aut", "cre")),
+           person("Brent", "Gin", , "bg32@calvin.edu", role = c("aut", "cre")),
+    
+Description: This package contains a df_apply function that will expect a dataframe and a function and make modifications to the dataframe based one those inputs.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
