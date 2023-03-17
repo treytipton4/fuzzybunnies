@@ -1,3 +1,4 @@
 # fuzzybunnies
 Creating an R Package as a group
-Can you see this new message?
+
+Trey Tipton, Trevor VanVeldhuisen, Brent Gin
