@@ -28,6 +28,6 @@ increment <- function(x) {
   x <- x + 5
 }
 
-df_apply(df, increment, is.numeric))
+df_apply(df, increment, is.numeric)
 
 }
