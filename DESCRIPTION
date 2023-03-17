@@ -5,7 +5,6 @@ Authors@R:
     person("Trey", "Tipton", , "tct5@calvin.edu", role = c("aut", "cre")),
            person("Trevor", "VanVeldhuisen", , "tsv9@calvin.edu", role = c("aut", "cre")),
            person("Brent", "Gin", , "bg32@calvin.edu", role = c("aut", "cre")),
-    
 Description: This package contains a df_apply function that will expect a dataframe and a function and make modifications to the dataframe based one those inputs.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
