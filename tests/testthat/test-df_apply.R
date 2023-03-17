@@ -13,3 +13,4 @@ increment <- function(x) {
 test_that("dataset is modified", {
   expect_equal(df_apply(df, increment, is.numeric), df2)
 })
+#test
