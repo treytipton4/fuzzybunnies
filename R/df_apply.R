@@ -26,3 +26,9 @@ df_apply <- function(.data, .fun, .filter, ...) {
   }
   return(.data)
 }
+
+getwd()
+read_file = read.csv('USGOVFEDMILRGSP.csv')
+
+print(read_file)
+
