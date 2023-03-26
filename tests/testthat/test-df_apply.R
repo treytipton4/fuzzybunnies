@@ -13,4 +13,21 @@ increment <- function(x) {
 test_that("dataset is modified", {
   expect_equal(df_apply(df, increment, is.numeric), df2)
 })
+
+
+x <- c(1.1, 2.5, 3.9)
+y <- c(4, 5, 6)
+z <- c("Hello", "Hi", "Hey")
+xyz <- data.frame(x, y, z)
+
+
+x2 <- c(1, 2, 3)
+y2 <- c(4, 5, 6)
+z2 <- c("Hello", "Hi", "Hey")
+xyz2 <- data.frame(x, y, z)
+
+test_that("df_apply works", {
+  expect_equal(df_apply(xyz, floor, is.numeric), xyz2)
+})
 #test
+
