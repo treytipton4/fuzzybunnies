@@ -10,13 +10,13 @@
 #' @examples
 #' Name <- c("Jon", "Bill", "Maria", "Ben", "Tina")
 #' Age <- c(23, 41, 32, 58, 26)
-#' df <- data.frame(Name, Age)
+#' df_fuzzybunnies <- data.frame(Name, Age)
 #'
 #' increment <- function(x) {
 #'   x <- x + 5
 #' }
 #'
-#' df_apply(df, increment, is.numeric)
+#' df_apply(df_fuzzybunnies, increment, is.numeric)
 #'
 df_apply <- function(.data, .fun, .filter) {
   for (i in ncol(.data)) {
