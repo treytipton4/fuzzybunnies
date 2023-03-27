@@ -1,0 +1,20 @@
+Package: fuzzybunnies
+Title: Contains a Function for Working with Dataframes in R
+Version: 0.0.0.9000
+Authors@R: c(person("Trey", "Tipton", , "tct5@calvin.edu", role = c("aut", "cre")),
+           person("Trevor", "VanVeldhuisen", , "tsv9@calvin.edu", role = "aut"),
+           person("Brent", "Gin", , "bg32@calvin.edu", role = "aut"))
+Description: This package contains a df_apply function that will expect a dataframe and a function and make modifications to the dataframe based one those inputs.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Depends: 
+    R (>= 2.10)
+LazyData: true
+VignetteBuilder: knitr

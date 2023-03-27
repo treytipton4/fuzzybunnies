@@ -1,0 +1,63 @@
+---
+title: "fuzzybunnies"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{fuzzybunnies}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(fuzzybunnies)
+```
+
+# How to use the fuzzybunnies
+
+This R package contains a function called df_apply that expects a dataframe, a function, and a filter, like so: df_apply(.data, .fun, .filter, ...).
+
+<fuzzybunnies> is useful if you would like to perform an R command and apply it to one or multiple columns of a data frame. You can also filter the dataframe for only columns you would like to perform the command on. For example, if you want to round all of the numbers in your data frame but you also have columns with strings (thus you only want to apply the round function to numeric columns), you would do something like this: df_apply(your_data, round, is.numeric).
+
+The ... in the function allows you to input the rest of the .fun expectations if you wish to; for the example above, if you wanted to round to two digits, you would do this: df_apply(your_data, round, is.numeric, digits = 2).
+
+# Examples
+
+Example 1:
+
+```{r}
+increment <- function(x) {
+  x <- x + 5
+}
+
+head(df_fuzzybunnies)
+```
+
+The increment function adds 5 to each value, so here it is applied to the numeric columns only. Thus, the Name column remains the same and the Age column's value each go up by 5 when using the <fuzzybunnies> function df_apply().
+
+```{r}
+new_df <- df_apply(df_fuzzybunnies, increment, is.numeric)
+
+head(new_df)
+```
+
+
+Example 2:
+
+```{r}
+head(xyz_fuzzybunnies)
+```
+
+This example applies an existing R command, floor(), to the xyz dataframe - again only applying it to the numeric columns. The floor function rounds all numbers down to the nearest integer, thus, when using the df_apply(), the y and z columns should remain the same while the x column is changed to the values 1, 2, and 3.
+
+```{r}
+new_xyz <- df_apply(xyz_fuzzybunnies, floor, is.numeric)
+
+head(new_xyz)
+```
+
