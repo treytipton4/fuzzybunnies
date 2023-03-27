@@ -29,20 +29,7 @@ function to the numeric columns of a data frame using df_apply():
 ``` r
 library(fuzzybunnies)
 
-x <- c(1.1, 2.5, 3.9)
-y <- c(4, 5, 6)
-z <- c("Hello", "Hi", "Hey")
-xyz <- data.frame(x, y, z)
-
-head(xyz)
-#>     x y     z
-#> 1 1.1 4 Hello
-#> 2 2.5 5    Hi
-#> 3 3.9 6   Hey
-
-new_xyz <- df_apply(xyz, floor, is.numeric)
-
-head(new_xyz)
+head(xyz_fuzzybunnies)
 #>     x y     z
 #> 1 1.1 4 Hello
 #> 2 2.5 5    Hi
@@ -53,4 +40,14 @@ This example applies an existing R command, floor(), to the xyz
 dataframe - again only applying it to the numeric columns. The floor
 function rounds all numbers down to the nearest integer, thus, when
 using the df_apply(), the y and z columns should remain the same while
-the x column is changed to the values 1, 2, and 3.
+the x column is changed to the values 1, 2, and 3. Let’s watch it work
+
+``` r
+new_xyz <- df_apply(xyz_fuzzybunnies, floor, is.numeric)
+
+head(new_xyz)
+#>     x y     z
+#> 1 1.1 4 Hello
+#> 2 2.5 5    Hi
+#> 3 3.9 6   Hey
+```
