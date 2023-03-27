@@ -7,7 +7,7 @@
 <!-- badges: end -->
 
 fuzzybunnies contains a function called df_apply() that applies any
-function to a data frame, it expects a data frame, a function, and
+function to a data frame. It expects a data frame, a function, and
 another function that filters which columns of the data frame you want
 to apply the given function to.
 
@@ -53,4 +53,4 @@ This example applies an existing R command, floor(), to the xyz
 dataframe - again only applying it to the numeric columns. The floor
 function rounds all numbers down to the nearest integer, thus, when
 using the df_apply(), the y and z columns should remain the same while
-the x column is change to the values 1, 2, and 3.
+the x column is changed to the values 1, 2, and 3.
