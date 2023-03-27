@@ -35,7 +35,7 @@ increment <- function(x) {
   x <- x + 5
 }
 
-head(fuzzybunnies)
+head(df_fuzzybunnies)
 ```
 
 The increment function adds 5 to each value, so here it is applied to the numeric columns only. Thus, the Name column remains the same and the Age column's value each go up by 5 when using the <fuzzybunnies> function df_apply().
