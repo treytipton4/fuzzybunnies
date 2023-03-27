@@ -4,7 +4,7 @@
 \alias{df_apply}
 \title{Apply a function to columns of a dataset}
 \usage{
-df_apply(.data, .fun, .filter)
+df_apply(.data, .fun, .filter, ...)
 }
 \arguments{
 \item{.data}{The dataset}
@@ -12,6 +12,8 @@ df_apply(.data, .fun, .filter)
 \item{.fun}{The function to apply}
 
 \item{.filter}{The filter of columns to apply the function}
+
+\item{...}{Additional parameters passed to .fun}
 }
 \value{
 Modified dataset
@@ -25,7 +27,7 @@ Age <- c(23, 41, 32, 58, 26)
 df_fuzzybunnies <- data.frame(Name, Age)
 
 increment <- function(x) {
-  x <- x + 5
+  return(x + 5)
 }
 
 df_apply(df_fuzzybunnies, increment, is.numeric)

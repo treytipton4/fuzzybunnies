@@ -7,7 +7,7 @@ Age <- c(28, 46, 37, 63, 31)
 df2 <- data.frame(Name, Age)
 
 increment <- function(x) {
-  x <- x + 5
+  return(x + 5)
 }
 
 test_that("dataset is modified", {
@@ -21,9 +21,9 @@ z <- c("Hello", "Hi", "Hey")
 xyz <- data.frame(x, y, z)
 
 
-x2 <- c(1, 2, 3)
-y2 <- c(4, 5, 6)
-z2 <- c("Hello", "Hi", "Hey")
+x <- c(1, 2, 3)
+y <- c(4, 5, 6)
+z <- c("Hello", "Hi", "Hey")
 xyz2 <- data.frame(x, y, z)
 
 test_that("df_apply works", {
