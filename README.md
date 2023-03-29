@@ -51,3 +51,5 @@ head(new_xyz)
 #> 2 2 5    Hi
 #> 3 3 6   Hey
 ```
+
+Package created by Trey Tipton, Trevor VanVeldhuisen, and Brent Gin
