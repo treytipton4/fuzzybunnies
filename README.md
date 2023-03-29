@@ -46,8 +46,10 @@ the x column is changed to the values 1, 2, and 3. Let’s watch it work
 new_xyz <- df_apply(xyz_fuzzybunnies, floor, is.numeric)
 
 head(new_xyz)
-#>     x y     z
-#> 1 1.1 4 Hello
-#> 2 2.5 5    Hi
-#> 3 3.9 6   Hey
+#>   x y     z
+#> 1 1 4 Hello
+#> 2 2 5    Hi
+#> 3 3 6   Hey
 ```
+
+Package created by Trey Tipton, Trevor VanVeldhuisen, and Brent Gin
