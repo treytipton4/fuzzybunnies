@@ -22,3 +22,14 @@ usethis::use_data(marketing_data, overwrite = TRUE)
 library(faraway)
 
 usethis::use_data(aatemp, overwrite = TRUE)
+
+
+bank_failures <- read.table("~/Library/Mobile Documents/com~apple~CloudDocs/Data 303/Fuzzy Bunnies/data-raw/bank-data.txt",
+                          sep = '\t',quote = "",na.strings = "#NA",comment.char = "", fill = TRUE, header = TRUE)
+
+print(bank_failures)
+#save(CERT, CHCLASS1, CITYST, COST, FAILDATE, FIN, ID, NAME, QBFSSET, QBFDEP, RESTYPE, RESTYPE1, SAVER, file = )
+usethis::use_data(bank_failures, overwrite = TRUE)
+
+#print(bank.data)
+

@@ -55,3 +55,17 @@
 #' }
 #' @source From the package "faraway"
 "aatemp"
+
+#' Bank Data
+#'
+#' Bank failure data
+#'
+#' @format ## `aatemp`
+#' A data frame with 115 rows and 2 columns:
+#' \describe{
+#'   \item{CERT}{cert}
+#'   \item{CHCLASS1}{chclass}
+#'   ...
+#' }
+#' @source From Trevor's files
+"bank_failures"

@@ -20,9 +20,15 @@
 #' df_apply(df_fuzzybunnies, increment, is.numeric)
 #'
 df_apply <- function(.data, .fun, .filter, ...) {
+  if (is.data.frame(.data) == FALSE) {
+    stop("Dataset parameter is not a dataset")
+  }
   for (i in 1:ncol(.data)) {
     if (sapply(.data[i], .filter))
       .data[i] <- .fun(.data[i], ...)
   }
   return(.data)
 }
+
+
+
