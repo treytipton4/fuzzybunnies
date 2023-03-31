@@ -52,4 +52,6 @@ head(new_xyz)
 #> 3 3 6   Hey
 ```
 
+[Package Website](https://treytipton4.github.io/fuzzybunnies/)
+
 Package created by Trey Tipton, Trevor VanVeldhuisen, and Brent Gin
