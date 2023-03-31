@@ -48,5 +48,7 @@ new_xyz <- df_apply(xyz_fuzzybunnies, floor, is.numeric)
 head(new_xyz)
 ```
 
+[Package Website](https://treytipton4.github.io/fuzzybunnies/)
+
 Package created by Trey Tipton, Trevor VanVeldhuisen, and Brent Gin
 
