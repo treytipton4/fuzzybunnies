@@ -31,5 +31,4 @@ print(bank_failures)
 #save(CERT, CHCLASS1, CITYST, COST, FAILDATE, FIN, ID, NAME, QBFSSET, QBFDEP, RESTYPE, RESTYPE1, SAVER, file = )
 usethis::use_data(bank_failures, overwrite = TRUE)
 
-#print(bank.data)
 
