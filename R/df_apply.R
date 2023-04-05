@@ -30,8 +30,8 @@
 df_apply <- function(.data, .fun, .filter, ...) {
   stopifnot(is.data.frame(.data))
   for (i in 1:ncol(.data)) {
-    if (sapply(.data[i], .filter))
-      .data[i] <- .fun(.data[i], ...)
+    if (all(sapply(.data[[i]], .filter) == TRUE))
+      .data[[i]] <- .fun(.data[[i]], ...)
   }
   return(.data)
 }
