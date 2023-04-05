@@ -21,14 +21,14 @@
 #' # keeping only the first letter (and ellipses) of the days of the week
 #' # and only applying to character columns
 #'
-#' # requires library(stringr)
+#' library(stringr)
 #'
 #' xy_days_of_week <- data.frame(x = c(1,2,3,4,5,6,7),
 #' y = c('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'))
 #'
 #' df_apply(xy_days_of_week, str_trunc, is.character, width = 4)
 df_apply <- function(.data, .fun, .filter, ...) {
-  stopifnot(is.data.frame(.data))
+  stopifnot('.data must be a dataframe' = is.data.frame(.data))
   for (i in 1:ncol(.data)) {
     if (all(sapply(.data[[i]], .filter) == TRUE))
       .data[[i]] <- .fun(.data[[i]], ...)

@@ -34,7 +34,7 @@ df_apply(df_fuzzybunnies, increment, is.numeric)
 # keeping only the first letter (and ellipses) of the days of the week
 # and only applying to character columns
 
-# requires library(stringr)
+library(stringr)
 
 xy_days_of_week <- data.frame(x = c(1,2,3,4,5,6,7),
 y = c('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'))
