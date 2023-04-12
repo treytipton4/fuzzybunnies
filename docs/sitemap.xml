@@ -16,6 +16,9 @@
     <loc>~fuzzybunnies/articles/index.html</loc>
   </url>
   <url>
+    <loc>~fuzzybunnies/articles/trey-graphics-package.html</loc>
+  </url>
+  <url>
     <loc>~fuzzybunnies/authors.html</loc>
   </url>
   <url>
@@ -23,6 +26,9 @@
   </url>
   <url>
     <loc>~fuzzybunnies/reference/aatemp.html</loc>
+  </url>
+  <url>
+    <loc>~fuzzybunnies/reference/bank_failures.html</loc>
   </url>
   <url>
     <loc>~fuzzybunnies/reference/df_apply.html</loc>
