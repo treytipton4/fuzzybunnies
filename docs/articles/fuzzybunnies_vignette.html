@@ -42,6 +42,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/fuzzybunnies_vignette.html">fuzzybunnies</a>
+    <a class="dropdown-item" href="../articles/trey-graphics-package.html">trey-graphics-package</a>
   </div>
 </li>
       </ul>
@@ -85,7 +86,7 @@ command on. For example, if you want to round all of the numbers in your
 data frame but you also have columns with strings (thus you only want to
 apply the round function to numeric columns), you would do something
 like this: df_apply(your_data, round, is.numeric).</fuzzybunnies></p>
-<p>The … in the function allows you to input the rest of the .fun
+<p>The (…) in the function allows you to input the rest of the .fun
 expectations if you wish to; for the example above, if you wanted to
 round to two digits, you would do this: df_apply(your_data, round,
 is.numeric, digits = 2).</p>

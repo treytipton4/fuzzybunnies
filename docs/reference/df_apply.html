@@ -25,6 +25,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/fuzzybunnies_vignette.html">fuzzybunnies</a>
+    <a class="dropdown-item" href="../articles/trey-graphics-package.html">trey-graphics-package</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -54,33 +55,31 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>.data</dt>
-<dd><p>The dataset</p></dd>
+<dd><p>a dataframe</p></dd>
 
 
 <dt>.fun</dt>
-<dd><p>The function to apply</p></dd>
+<dd><p>a function that can be applied to a column of a data frame and return a column of a data frame</p></dd>
 
 
 <dt>.filter</dt>
-<dd><p>The filter of columns to apply the function</p></dd>
+<dd><p>a function that filters which columns to apply the function and returns a logical (TRUE or FALSE), .fun is applied to the columns that return TRUE</p></dd>
 
 
 <dt>...</dt>
-<dd><p>Additional parameters passed to .fun</p></dd>
+<dd><p>additional parameters passed to .fun</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>Modified dataset</p>
+<p>modified dataframe</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">Name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Jon"</span>, <span class="st">"Bill"</span>, <span class="st">"Maria"</span>, <span class="st">"Ben"</span>, <span class="st">"Tina"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">Age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">23</span>, <span class="fl">41</span>, <span class="fl">32</span>, <span class="fl">58</span>, <span class="fl">26</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">df_fuzzybunnies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">Name</span>, <span class="va">Age</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#apply increment function to a dataframe called df_fuzzybunnies, but only for the numeric columns</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">increment</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">x</span> <span class="op">+</span> <span class="fl">5</span><span class="op">)</span></span></span>
@@ -94,6 +93,24 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4   Ben  63</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5  Tina  31</span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># apply str_trunc function to a dataframe</span></span></span>
+<span class="r-in"><span><span class="co"># keeping only the first letter (and ellipses) of the days of the week</span></span></span>
+<span class="r-in"><span><span class="co"># and only applying to character columns</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">xy_days_of_week</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Sunday'</span>, <span class="st">'Monday'</span>, <span class="st">'Tuesday'</span>, <span class="st">'Wednesday'</span>, <span class="st">'Thursday'</span>, <span class="st">'Friday'</span>, <span class="st">'Saturday'</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">df_apply</span><span class="op">(</span><span class="va">xy_days_of_week</span>, <span class="va">str_trunc</span>, <span class="va">is.character</span>, width <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   x    y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1 S...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2 M...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3 T...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 4 W...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 5 T...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 6 F...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7 7 S...</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
