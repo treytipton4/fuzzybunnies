@@ -1,0 +1,63 @@
+---
+title: "Candy Vignette"
+author: "Trevor VanVeldhuisen"
+date: "`3/31/2023`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Candy_Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, setup}
+library(fuzzybunnies)
+library(tidyverse)
+library(dplyr)
+```
+
+# How to use the fuzzybunnies
+
+This R package contains a function called df_apply that expects a dataframe, a function, and a filter, like so: df_apply(.data, .fun, .filter, ...).
+
+<fuzzybunnies> is useful if you would like to perform an R command and apply it to one or multiple columns of a data frame. You can also filter the dataframe for only columns you would like to perform the command on. For example, if you want to round all of the numbers in your data frame but you also have columns with strings (thus you only want to apply the round function to numeric columns), you would do something like this: df_apply(your_data, round, is.numeric).
+
+The (...) in the function allows you to input the rest of the .fun expectations if you wish to; for the example above, if you wanted to round to two digits, you would do this: df_apply(your_data, round, is.numeric, digits = 2).
+
+# Vignette using the dataframe candydata
+```{r}
+head(candydata)
+```
+The dataframe shows all of the most preferred Halloween candy. The data comes from a survey that reached 8,371 people and pitted up different candies against each other in about 269,000 rounds. That is where the win percent column comes from, while the other data is based off of the characteristics, price, and amount of sugar. 
+
+This was found on the website https://fivethirtyeight.com/videos/the-ultimate-halloween-candy-power-ranking/
+
+#Introducing ggplot2
+```{r}
+library(ggplot2)
+```
+
+
+ggplot2 is a package based on "The Grammar of Graphics." It provides an easy way to present daata based on the variables and aesthetics you tell ggplot2 to use.
+To use ggplot, you staart with ggplot(), add a dataset to it, and then begin to add layers to the code by telling it what kind of aesthetic you are looking for. 
+
+#Creating a bar plot
+```{r}
+#organize data
+acsendwin <- candydata %>%
+  arrange(desc(winpercent)) %>%
+  slice(1:10) %>%
+  
+print(acsendwin)
+ggplot(data=acsendwin, aes(x=competitorname, y=winpercent)) +
+  geom_bar(stat = "Identity", fill = "Blue")+ theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+
