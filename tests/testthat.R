@@ -10,3 +10,4 @@ library(testthat)
 library(fuzzybunnies)
 
 test_check("fuzzybunnies")
+

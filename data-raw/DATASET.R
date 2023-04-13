@@ -24,7 +24,7 @@ library(faraway)
 usethis::use_data(aatemp, overwrite = TRUE)
 
 
-bank_failures <- read.table("~/Library/Mobile Documents/com~apple~CloudDocs/Data 303/Fuzzy Bunnies/data-raw/bank-data.txt",
+bank_failures <- read.table("~/Library/Mobile Documents/com~apple~CloudDocs/Data 303/Fuzzy Bunnies/data/bank_failures.rda",
                           sep = '\t',quote = "",na.strings = "#NA",comment.char = "", fill = TRUE, header = TRUE)
 
 print(bank_failures)

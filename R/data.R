@@ -69,3 +69,4 @@
 #' }
 #' @source From Trevor's files
 "bank_failures"
+
