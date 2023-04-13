@@ -1,5 +1,6 @@
 ---
-title: "trey-graphics-package"
+title: "trey-graphics-package, plotly"
+author: "Trey Tipton"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{trey-graphics-package}
@@ -12,6 +13,29 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(fuzzybunnies)
+library(tidyverse)
+
+market <- marketing_data |>
+  mutate(person_id = c(1:nrow(marketing_data))) |>
+  # pivot more to undo one-hot encoding (multiple binary columns to single categorical variables)
+  pivot_longer(cols = starts_with('marital'),
+               names_to = 'Marital_Status',
+               names_transform = ~stringr::str_split_i(.x, '_', i = 2), # keep only the part after the _
+               values_to = 'Marital_Keepers') |>
+  # now we want to keep only rows where Marital_Keepers is 1 and then delete that variable
+  filter(Marital_Keepers == 1) |>
+  select(-Marital_Keepers) |>
+  # do same for education
+  pivot_longer(cols = starts_with('education'),
+               names_to = 'Education',
+               names_transform = ~stringr::str_split_i(.x, '_', i = 2), # keep only the part after the _
+               values_to = 'Ed_Keepers') |>
+  # now we want to keep only rows where Ed_Keepers is 1 and then delete that variable
+  filter(Ed_Keepers == 1) |>
+  select(-Ed_Keepers) |>
+  mutate(Marital_Status = factor(Marital_Status),
+         Education = factor(Education))
 ```
 
 ```{r setup}
@@ -19,4 +43,110 @@ library(fuzzybunnies)
 ```
 
 
-plotly graphics package
+# plotly Graphics Package
+
+```{r}
+library(plotly)
+```
+
+## How It Works
+
+The plotly graphics package, which can be used with both R and python and is powered by the JavaScript library plotly.js, enables you to create interactive graphics. This is helpful to be able to look at the values of specific data points, the exact count of a variable on a bar chart, the exact values of the median and quartiles of boxplots, etc. Using plotly is fairly simple and works similarly to other graphicsp packages; in fact, there is a specific plotly function, ggplotly(), that can transform a ggplot2 object into a plotly object, making previously made graphics in to interactive web based visualizations. However, I will be showing how to directly create interactive graphics with plotly using the conveniently named plot_ly() function. Likewise with other graphics package functions, you can input variables, colors, size, and more into the function. One small difference is that the function wants you to specify the type of plot you are creating (i.e. type = 'bar' for a bar chart), however, the function is fairly decent at figuring out which type seems appropriate if you do not tell it which one. This can be helpful if you are not sure which plot type is best for comparing certain variables, as you can see what the function defaults to and go from there. It also allows you to add traces (using add_trace()) in order to compare multiple variables in your dataset. The main benefit of this package over others is the interactivity feature which allows you to hover your mouse over the plot to gain an intuitive understanding of the data.
+
+## The Data
+
+The data I will be using comes from a kaggle Data Card [shown here](https://www.kaggle.com/datasets/jackdaoud/marketing-data) and is publicly available on [github](https://github.com/nailson/ifood-data-business-analyst-test). It is also available using the fuzzybunnies R Package (called "marketing_data"). It is data from customer characteristics from an unknown food company and whether/when they accepted the company's ad campaign. It contains customer characteristics such as their income, marital status, number of children in the home, education, purchasing habits, days of being a customer, days since last purchase, etc. The main variable of interest is how many campaigns the customer accepted, meaning how many of their ad campaigns prompted the customer to buy some unknown product. The company released 6 ad campaigns and the data states whether the customer accepted each one (for example AcceptedCmp1 = 1 if they accepted, 0 if not). A row also states how many of those campaigns they accepted in the variable AcceptedCmpOverall.
+
+While exploring this data using plotly, we want to see if their is a relationship between the customers' characteristics and how likely they were to accept an ad campaign. Let's take a quick look at the data. I did some wrangling on "marketing_data", and changed the name to "market":
+
+```{r}
+head(market)
+```
+
+## Introducing plotly
+
+The dataset shows information of 2205 customers, so let's just see how many of them accepted the ad campaigns. To do this, plotly needs the data and the variable of interest; I factored it so that it was categorical, a number of how many campaigns they accepted from 0-6.
+```{r}
+plot_ly(market, x = ~factor(AcceptedCmpOverall), type = 'bar') %>% 
+  layout(title = "Ad Campaigns Accepted",
+         xaxis = list(title = "Number of Accepted Ad Campaigns Per Customer"),
+         yaxis = list (title = "Count"))
+```
+
+This is fairly hard to interpret because instead of giving us counts, it is adding a bar for each individual if they accepted. Specifying bar would work better especially if you have count values in your data or depending on how your data is pivoted; you just have to play around with it. Like I suggested earlier, let's try not specifying a type and see what plotly does.
+
+```{r}
+plot_ly(market, x = ~factor(AcceptedCmpOverall)) %>% 
+  layout(title = "Ad Campaigns Accepted",
+         xaxis = list(title = "Number of Accepted Ad Campaigns Per Customer"),
+         yaxis = list (title = "Count"))
+```
+
+This is much better and a lot easier to interpret. plotly knew exactly what I wanted, and in the form of a warning, it even told me what type seems appropriate.
+
+Clearly, most customers did not accept any of the ad campaigns, some accepted one, less accepted two of them, etc. 
+
+Check out for yourself what makes plotly better than other graphics packages. It seems that somewhere in the middle of 1600 and 1800 customers did not accept any ad campaigns, but if you want the exact number, plotly gives you exactly that, hover your mouse over that first bar to see that 1747 customers accepted 0 ad campaigns. You can do this for any of the bars.
+
+As you can see, it is also fairly easy to add axes titles in plotly, using a pipe and layout().
+
+## Exploring More
+
+I want to see the distribution of customer incomes for each of the number of campaigns accepted (0-4, looks like no one accepted 5 or 6 of the campaigns). Let's specify this to plotly by putting Income on the y axis and having the type be 'box", for boxplots.
+
+```{r}
+plot_ly(market, x = ~factor(AcceptedCmpOverall), y = ~Income, type = 'box') %>% 
+  layout(title = "Distribution of Customer Incomes",
+         xaxis = list(title = "Number of Accepted Ad Campaigns Per Customer"),
+         yaxis = list (title = "Customer Income"))
+```
+
+Wow! It seems that the more income a customer receives, the more ad campaigns they would accept. This makes sense, as customers that make more money can buy more things.
+
+This plot is fairly useful on its own, but plotly takes it to the next level. Hover your mouse over any of the boxplots to see the exact median and quartile values, as well as exact outlier values. This makes it easy to compare data, which is what a graphic is supposed to do.
+
+Let's try specifying a color to a categorical variable:
+
+```{r}
+plot_ly(market, x = ~factor(AcceptedCmpOverall), y = ~Income, color = ~Marital_Status, type = 'box') %>% 
+  layout(title = "Distribution of Customer Incomes by Marital Status",
+         xaxis = list(title = "Number of Accepted Ad Campaigns Per Customer"),
+         yaxis = list (title = "Customer Income"))
+```
+
+This is slightly difficult to interpret, as they are all overlapped. However, plotly's interactivity makes this plot super useful. You can click on which boxplots you want to see, and do however many you want at the same time. This actually provides useful insight into this data; double click on the "Married" box in the top right corner to see only the income distributions of customers that are married. Interestingly, the income distribution is slightly lower for those that accepted 4 campaigns than 3; but for divorced people, the income is much higher for those that accepted 4 campaigns (click on the "Divorced" box to see both at the same time, then click on the "Married" one again to deselect it).
+
+One disadvantage of this plot is that you cannot see how many customers make up each distribution. This means that some of them could have very few values, and as we saw earlier, not that many people accepted 4 campaigns overall which could be causing the discrepancy. Still, the interactivity plotly provides makes for some interesting insights.
+
+Notice how plotly provides several interactive options along the top right of the plot. This allows you to zoom in or out, specify certain preferences, and more.
+
+## A Few More Plots
+
+Let's look at the number of campaigns accepted in comparison with the customers' education levels.
+
+```{r}
+plot_ly(market, x = ~factor(AcceptedCmpOverall), color = ~Education) %>% 
+  layout(title = "Ad Campaigns Accepted by Education",
+         xaxis = list(title = "Number of Accepted Ad Campaigns Per Customer"),
+         yaxis = list (title = "Count"))
+```
+
+This is helpful to show that their does not seem to be much disparity by education when it comes the number of campaigns accepted. This graph is still useful to quickly see how many campaigns each level of education accepted. For example, I can see that 76 people with PhD's accepted one ad campaign.
+
+
+Suppose the company wants to know how customers' income impacts the number of meat products that they buy and how many ad campaigns they accepted. We can create a simple scatter plot with the income on the y axis and number of meat products bought on the x, with color coordinated to how many campaigns they accepted.
+
+```{r}
+plot_ly(market, x = ~MntMeatProducts, y = ~Income, color = ~factor(AcceptedCmpOverall), type = 'scatter') %>% 
+  layout(title = "Comparing Income and Meat Purchases by Number of Ad Campaigns Accepted",
+         xaxis = list(title = "Number of Meat Purchases"),
+         yaxis = list (title = "Income"))
+```
+
+Wow! There seems to be a lot of people that do not buy very many meat products, and for almost all of them, their income is below 70k. I think that this graph reveals to us that the ad campaign probably has little to do with meat products as there is not many differences among the amount of accepted campaigns and their distribution of meat products bought. However, there does seem to be an important relationship between income and the number of meat products purchased.\
+
+Notice that plotly automatically sets the mode to markers. This is because this is a scatterplot and if you need to, plotly allows you to also change the size of the markers for scatterplots. This could be useful if you want the markers to be bigger or smaller, or if you want the markers to also represent a variable by size.
+
+## Conclusion
+
+Overall, plotly proves itself to be a useful graphics package as it goes above and beyond most other packages. There are a lot of other useful things plotly can do, especially for maps. Think about how helpful interactivity would be on a geographical map, as you can hover over specific countries or cities to gain insgihtful information. I am glad that I learned plotly because interactive visualizations are often times more useful, and even if they are not, it usually does not hurt to have them be interactive.
