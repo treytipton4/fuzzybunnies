@@ -36,3 +36,7 @@ candydata <- read_csv('https://raw.githubusercontent.com/fivethirtyeight/data/ma
 usethis::use_data(candydata, overwrite = TRUE)
 
 
+diamond_data <- read_csv("https://raw.githubusercontent.com/Opensourcefordatascience/Data-sets/master/diamonds.csv")
+diamond_data <- select(diamond_data, carat:price)
+
+usethis::use_data(diamond_data, overwrite = TRUE)
