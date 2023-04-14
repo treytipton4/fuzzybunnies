@@ -24,11 +24,15 @@ library(faraway)
 usethis::use_data(aatemp, overwrite = TRUE)
 
 
-bank_failures <- read.table("~/Library/Mobile Documents/com~apple~CloudDocs/Data 303/Fuzzy Bunnies/data/bank_failures.rda",
-                          sep = '\t',quote = "",na.strings = "#NA",comment.char = "", fill = TRUE, header = TRUE)
+#bank_failures <- read.table("~/Library/Mobile Documents/com~apple~CloudDocs/Data 303/Fuzzy Bunnies/data/bank_failures.rda",
+#                          sep = '\t',quote = "",na.strings = "#NA",comment.char = "", fill = TRUE, header = TRUE)
 
-print(bank_failures)
+#print(bank_failures)
 #save(CERT, CHCLASS1, CITYST, COST, FAILDATE, FIN, ID, NAME, QBFSSET, QBFDEP, RESTYPE, RESTYPE1, SAVER, file = )
-usethis::use_data(bank_failures, overwrite = TRUE)
+#usethis::use_data(bank_failures, overwrite = TRUE)
+
+
+candydata <- read_csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/candy-power-ranking/candy-data.csv')
+usethis::use_data(candydata, overwrite = TRUE)
 
 
