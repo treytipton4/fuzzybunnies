@@ -8,11 +8,11 @@
 \subsection{\code{diamond_data}}{
 
 Data frame with 53940 rows and 7 columns
-\describ{
+\describe{
 \item{carat}{Unit of Weight}
 \item{cut}{Classification of Current Quality}
-\item(color){Color Grade}
-\item(clarity){Opaqueness}
+\item{color}{Color Grade}
+\item{clarity}{Opaqueness}
 \item{depth}{Thickness of Diamond}
 \item{table}{Largest face of Diamond}
 \item{price}{Total Sell Price}
