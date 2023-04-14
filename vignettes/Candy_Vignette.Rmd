@@ -72,3 +72,5 @@ ggplot(candydata,aes(sugarpercent, winpercent)) +
 For this model we will use a significance value of p = 0.05 and a null hypothesis that there is no relationship between sugar content and win percent. Looking at the results of this model and a p-value of 0.0349, we can reject the null hypothesis and claim these two variables do have a relationship. However, looking at the multiple R-squared and the corresponding graph, we can see that this model has a lot of variability around the regression line and sugar content is not explaining the variance in the dependent variable. With this, we can add more variables to the model to see which ones contribute the most to having the highest win percentage.
 
 
+
+
