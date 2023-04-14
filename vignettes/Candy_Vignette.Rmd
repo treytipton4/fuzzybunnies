@@ -1,7 +1,6 @@
 ---
 title: "Candy Vignette"
 author: "Trevor VanVeldhuisen"
-date: "`3/31/2023`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Candy_Vignette}
@@ -16,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, setup}
+```{r}
 library(fuzzybunnies)
 library(tidyverse)
 library(dplyr)
@@ -32,6 +31,8 @@ The (...) in the function allows you to input the rest of the .fun expectations 
 
 # Vignette using the dataframe candydata
 ```{r}
+candydata <- read_csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/candy-power-ranking/candy-data.csv')
+
 head(candydata)
 ```
 The dataframe shows all of the most preferred Halloween candy. The data comes from a survey that reached 8,371 people and pitted up different candies against each other in about 269,000 rounds. That is where the win percent column comes from, while the other data is based off of the characteristics, price, and amount of sugar. 
@@ -52,9 +53,8 @@ To use ggplot, you start with ggplot(), add a data set to it, and then begin to 
 #organize data
 acsendwin <- candydata %>%
   arrange(desc(winpercent)) %>%
-  slice(1:10) %>%
+  slice(1:10)
   
-print(acsendwin)
 ggplot(data=acsendwin, aes(x=competitorname, y=winpercent)) +
   geom_bar(stat = "Identity", fill = "Blue")+ theme_minimal() +
   theme(axis.text.x = element_text(angle = 90))

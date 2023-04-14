@@ -70,6 +70,7 @@
 #' @source From Trevor's files
 "bank_failures"
 
+<<<<<<< HEAD
 #' Diamond Data
 #'
 #' Data on diamond statistics and pricing
@@ -87,3 +88,18 @@
 #' }
 #' @source Github Collection
 "diamond_data"
+=======
+#' Candy Data
+#'
+#' Candy Data data
+#'
+#' @format ## `aatemp`
+#' A data frame with ?? rows and ? columns:
+#' \describe{
+#'   \item{CERT}{cert}
+#'   \item{CHCLASS1}{chclass}
+#'   ...
+#' }
+#' @source From github
+"candydata"
+>>>>>>> ed10754504fc901705c1c33295b8af21e421871e

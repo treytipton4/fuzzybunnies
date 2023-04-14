@@ -10,6 +10,9 @@
     <loc>~fuzzybunnies/LICENSE.html</loc>
   </url>
   <url>
+    <loc>~fuzzybunnies/articles/Candy_Vignette.html</loc>
+  </url>
+  <url>
     <loc>~fuzzybunnies/articles/fuzzybunnies_vignette.html</loc>
   </url>
   <url>
@@ -29,6 +32,9 @@
   </url>
   <url>
     <loc>~fuzzybunnies/reference/bank_failures.html</loc>
+  </url>
+  <url>
+    <loc>~fuzzybunnies/reference/candydata.html</loc>
   </url>
   <url>
     <loc>~fuzzybunnies/reference/df_apply.html</loc>
