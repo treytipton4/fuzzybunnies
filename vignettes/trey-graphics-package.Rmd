@@ -1,7 +1,8 @@
 ---
-title: "trey-graphics-package, plotly"
+title: "trey-graphics-package"
 author: "Trey Tipton"
 output: rmarkdown::html_vignette
+self-contained: true
 vignette: >
   %\VignetteIndexEntry{trey-graphics-package}
   %\VignetteEngine{knitr::rmarkdown}
