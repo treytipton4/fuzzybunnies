@@ -44,8 +44,8 @@ library(ggplot2)
 ```
 
 
-ggplot2 is a package based on "The Grammar of Graphics." It provides an easy way to present daata based on the variables and aesthetics you tell ggplot2 to use.
-To use ggplot, you staart with ggplot(), add a dataset to it, and then begin to add layers to the code by telling it what kind of aesthetic you are looking for. 
+ggplot2 is a package based on "The Grammar of Graphics." It provides an easy way to present data based on the variables and aesthetics you tell ggplot2 to use.
+To use ggplot, you start with ggplot(), add a data set to it, and then begin to add layers to the code by telling it what kind of aesthetic you are looking for. 
 
 #Creating a bar plot
 ```{r}
@@ -59,5 +59,16 @@ ggplot(data=acsendwin, aes(x=competitorname, y=winpercent)) +
   geom_bar(stat = "Identity", fill = "Blue")+ theme_minimal() +
   theme(axis.text.x = element_text(angle = 90))
 ```
+From this barchart, we can tell that Reese's Peanut Butter Cup is the most favorite Halloween Candy according to this study. 
+#Basic Regression Analysis
+Does the sugar content in the candy have any relation with the win percent? Here we can do linear regression to tell us if there is a relationship between the two.
+```{r}
+sugartest <- lm(winpercent ~ sugarpercent, data = candydata)
+print(summary(sugartest))
+ggplot(candydata,aes(sugarpercent, winpercent)) +
+  geom_point() +
+  geom_smooth(method='lm')
+```
+For this model we will use a significance value of p = 0.05 and a null hypothesis that there is no relationship between sugar content and win percent. Looking at the results of this model and a p-value of 0.0349, we can reject the null hypothesis and claim these two variables do have a relationship. However, looking at the multiple R-squared and the corresponding graph, we can see that this model has a lot of variability around the regression line and sugar content is not explaining the variance in the dependent variable. With this, we can add more variables to the model to see which ones contribute the most to having the highest win percentage.
 
 
