@@ -1,7 +1,6 @@
 ---
 title: "Diamond Data"
 author: "Brent Gin"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Diamond Data}
@@ -14,52 +13,57 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(fuzzybunnies)
+library(tidyverse)
 ```
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+##Diamond Dataset
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
-
-## Vignette Info
-
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```{r}
+diamond_data <- read_csv("https://raw.githubusercontent.com/Opensourcefordatascience/Data-sets/master/diamonds.csv")
+diamond_data <- select(diamond_data, carat:price) %>%
+  head(2000)
+head(diamond_data)
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+The dataset is a collection of diamonds and their classifications, including values about size, clarity, and quality. Carat is overall size of the diamond, cut is the grade of the diamond, color is the classification of color, clarity is the level of opaqueness, depth is the percentage of the distance from the table to the tip, and table is the percentage of the largest face to the longest width. For this example of Plotly, I took the first 2000 results for ease of use and clearer graphs as the original dataset has 53940 objects. The dataset is found on public archive on Github. It is also found on the fuzzybunnies package.
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+##Plotly Graphics
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+```{r}
+library(plotly)
 ```
 
-Also a quote using `>`:
+Plot allows for some basic graphing potential, ranging from all sorts of graph and charts. It requires a dataset and inputs that determine corresponding variables for axes. What makes this different from other graphing packages is that it provides an interactive interface that allows for a closer look at the result. For this example using the diamond dataset, I will find a comparison between cost and carat.
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+```{r}
+plot_ly(data = diamond_data, x = ~carat, y = ~price) %>%
+  layout(title = "Price by Carat Size",
+         xaxis = list(title = "Carats"),
+         yaxis = list(title = "Price"))
+
+```
+
+There is a very clear pattern from this scatter plot that diamonds with a carat size above roughly 0.5 sell for significantly more than diamonds that are smaller.
+
+What about cut? This graph compares the total sales for each color grade.
+
+```{r}
+plot_ly(data = diamond_data, x = ~color, y = ~price, type = "bar") %>%
+  layout(title = "Total Sales by Color Grade",
+         xaxis = list(title = "Color Grade"),
+         yaxis = list(title = "Total Sales"))
+
+```
+
+From this, it appears that the better the letter (earlier in the alphabet) the more are sales there are. However, this appears to not hold true for the color-grade of D. As D is the most clear, it is possible to assume that the price is lower because people aren't as willing to pay for a clearer diamond and thus more expensive.
+
+What thing I want to see the frequency of purchased diamonds and what size is most popular. I can do this in a bubble plot by compare depth and table with carat.
+
+```{r}
+sizeref <- 2.0 * max(diamond_data$carat) / (20**2)
+plot_ly(data = diamond_data, x = ~depth, y = ~table, text = ~carat, type = 'scatter', mode = 'markers',
+        marker = list(size = ~carat, opacity = 0.2, sizemode = 'area', sizeref = sizeref))
+```
+
+From this, it appears that there is a certain range of depth and table that is preferred, from around 59 to 64 for depth percentage and 54 to 61 for table percentage. Carat size seems to flunctuate for these values as well.
