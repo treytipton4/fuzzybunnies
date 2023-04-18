@@ -40,3 +40,4 @@ diamond_data <- read_csv("https://raw.githubusercontent.com/Opensourcefordatasci
 diamond_data <- select(diamond_data, carat:price)
 
 usethis::use_data(diamond_data, overwrite = TRUE)
+
