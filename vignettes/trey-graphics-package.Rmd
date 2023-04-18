@@ -36,7 +36,8 @@ market <- marketing_data |>
   filter(Ed_Keepers == 1) |>
   select(-Ed_Keepers) |>
   mutate(Marital_Status = factor(Marital_Status),
-         Education = factor(Education))
+         Education = factor(Education)) |>
+  select(AcceptedCmpOverall, Income, Marital_Status, Education, MntMeatProducts)
 ```
 
 ```{r setup}
@@ -52,7 +53,7 @@ library(plotly)
 
 ## How It Works
 
-The plotly graphics package, which can be used with both R and python and is powered by the JavaScript library plotly.js, enables you to create interactive graphics. This is helpful to be able to look at the values of specific data points, the exact count of a variable on a bar chart, the exact values of the median and quartiles of boxplots, etc. Using plotly is fairly simple and works similarly to other graphicsp packages; in fact, there is a specific plotly function, ggplotly(), that can transform a ggplot2 object into a plotly object, making previously made graphics in to interactive web based visualizations. However, I will be showing how to directly create interactive graphics with plotly using the conveniently named plot_ly() function. Likewise with other graphics package functions, you can input variables, colors, size, and more into the function. One small difference is that the function wants you to specify the type of plot you are creating (i.e. type = 'bar' for a bar chart), however, the function is fairly decent at figuring out which type seems appropriate if you do not tell it which one. This can be helpful if you are not sure which plot type is best for comparing certain variables, as you can see what the function defaults to and go from there. It also allows you to add traces (using add_trace()) in order to compare multiple variables in your dataset. The main benefit of this package over others is the interactivity feature which allows you to hover your mouse over the plot to gain an intuitive understanding of the data.
+The plotly graphics package, which can be used with both R and python and is powered by the JavaScript library plotly.js, enables you to create interactive graphics. This is helpful to be able to look at the values of specific data points, the exact count of a variable on a bar chart, the exact values of the median and quartiles of boxplots, etc. Using plotly is fairly simple and works similarly to other graphics packages; in fact, there is a specific plotly function, ggplotly(), that can transform a ggplot2 object into a plotly object, making previously made graphics in to interactive web based visualizations. However, I will be showing how to directly create interactive graphics with plotly using the conveniently named plot_ly() function. Likewise with other graphics package functions, you can input variables, colors, size, and more into the function. One small difference is that the function wants you to specify the type of plot you are creating (i.e. type = 'bar' for a bar chart), however, the function is fairly decent at figuring out which type seems appropriate if you do not tell it which one. This can be helpful if you are not sure which plot type is best for comparing certain variables, as you can see what the function defaults to and go from there. It also allows you to add traces (using add_trace()) in order to compare multiple variables in your dataset. The main benefit of this package over others is the interactivity feature which allows you to hover your mouse over the plot to gain an intuitive understanding of the data.
 
 ## The Data
 
@@ -150,4 +151,4 @@ Notice that plotly automatically sets the mode to markers. This is because this 
 
 ## Conclusion
 
-Overall, plotly proves itself to be a useful graphics package as it goes above and beyond most other packages. There are a lot of other useful things plotly can do, especially for maps. Think about how helpful interactivity would be on a geographical map, as you can hover over specific countries or cities to gain insgihtful information. I am glad that I learned plotly because interactive visualizations are often times more useful, and even if they are not, it usually does not hurt to have them be interactive.
+Overall, plotly proves itself to be a useful graphics package as it goes above and beyond most other packages. There are a lot of other useful things plotly can do, especially for maps. Think about how helpful interactivity would be on a geographical map, as you can hover over specific countries or cities to gain insightful information. I am glad that I learned plotly because interactive visualizations are often times more useful, and even if they are not, it usually does not hurt to have them be interactive.
