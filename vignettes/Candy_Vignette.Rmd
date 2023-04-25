@@ -19,58 +19,85 @@ knitr::opts_chunk$set(
 library(fuzzybunnies)
 library(tidyverse)
 library(dplyr)
+library(broom)
 ```
-
-# How to use the fuzzybunnies
-
-This R package contains a function called df_apply that expects a dataframe, a function, and a filter, like so: df_apply(.data, .fun, .filter, ...).
-
-<fuzzybunnies> is useful if you would like to perform an R command and apply it to one or multiple columns of a data frame. You can also filter the dataframe for only columns you would like to perform the command on. For example, if you want to round all of the numbers in your data frame but you also have columns with strings (thus you only want to apply the round function to numeric columns), you would do something like this: df_apply(your_data, round, is.numeric).
-
-The (...) in the function allows you to input the rest of the .fun expectations if you wish to; for the example above, if you wanted to round to two digits, you would do this: df_apply(your_data, round, is.numeric, digits = 2).
 
 # Vignette using the dataframe candydata
+
 ```{r}
 candydata <- read_csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/candy-power-ranking/candy-data.csv')
-
 head(candydata)
 ```
-The dataframe shows all of the most preferred Halloween candy. The data comes from a survey that reached 8,371 people and pitted up different candies against each other in about 269,000 rounds. That is where the win percent column comes from, while the other data is based off of the characteristics, price, and amount of sugar. 
 
-This was found on the website https://fivethirtyeight.com/videos/the-ultimate-halloween-candy-power-ranking/
+The dataframe shows all of the most preferred Halloween candy. The data comes from a survey that reached 8,371 people and pitted up different candies against each other in about 269,000 rounds. That is where the win percent column comes from, while the other data is based off of the characteristics, price, and amount of sugar.
+
+This was found on the website <https://fivethirtyeight.com/videos/the-ultimate-halloween-candy-power-ranking/>
 
 #Introducing ggplot2
+
 ```{r}
 library(ggplot2)
 ```
 
-
-ggplot2 is a package based on "The Grammar of Graphics." It provides an easy way to present data based on the variables and aesthetics you tell ggplot2 to use.
-To use ggplot, you start with ggplot(), add a data set to it, and then begin to add layers to the code by telling it what kind of aesthetic you are looking for. 
+ggplot2 is a package based on "The Grammar of Graphics." It provides an easy way to present data based on the variables and aesthetics you tell ggplot2 to use. To use ggplot, you start with ggplot(), add a data set to it, and then begin to add layers to the code by telling it what kind of aesthetic you are looking for.
 
 #Creating a bar plot
+
 ```{r}
 #organize data
 acsendwin <- candydata %>%
   arrange(desc(winpercent)) %>%
   slice(1:10)
-  
+
+#Create Top 10 Candies Bar Chart  
 ggplot(data=acsendwin, aes(x=competitorname, y=winpercent)) +
   geom_bar(stat = "Identity", fill = "Blue")+ theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90))
+  theme(axis.text.x = element_text(angle = 90)) +
+  xlab("Candy Type") + ylab("Win Percent") +
+  ggtitle("Top 10 Candies")
 ```
-From this barchart, we can tell that Reese's Peanut Butter Cup is the most favorite Halloween Candy according to this study. 
+
+From this bar chart, we can tell that Reese's Peanut Butter Cup is the most favorite Halloween Candy according to this study.
+
 #Basic Regression Analysis
+
 Does the sugar content in the candy have any relation with the win percent? Here we can do linear regression to tell us if there is a relationship between the two.
+
 ```{r}
+#Create the Model
 sugartest <- lm(winpercent ~ sugarpercent, data = candydata)
 print(summary(sugartest))
+
+#Plot the Model
 ggplot(candydata,aes(sugarpercent, winpercent)) +
   geom_point() +
-  geom_smooth(method='lm')
+  geom_smooth(method='lm') +
+  xlab("Sugar Percent") + ylab("Win Percent") +
+  ggtitle("Regression")
 ```
+
 For this model we will use a significance value of p = 0.05 and a null hypothesis that there is no relationship between sugar content and win percent. Looking at the results of this model and a p-value of 0.0349, we can reject the null hypothesis and claim these two variables do have a relationship. However, looking at the multiple R-squared and the corresponding graph, we can see that this model has a lot of variability around the regression line and sugar content is not explaining the variance in the dependent variable. With this, we can add more variables to the model to see which ones contribute the most to having the highest win percentage.
 
+#Seeing Which Characteristic Have the most Effect
 
+```{r}
+#Create the New Model with Extra Variables
+sigtest <- glm(winpercent ~ sugarpercent + chocolate + fruity + caramel + peanutyalmondy + nougat + crispedricewafer + hard + bar + pluribus, data = candydata)
+coef <- tidy(sigtest, conf.int = TRUE)
+coef
 
+#Plot the New Model
+ggplot(coef, aes(term, estimate)) +
+  geom_point() + 
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) + 
+  theme(axis.text.x = element_text(angle = 90)) +
+  ggtitle("Value Added to Win") +
+  scale_fill_grey() +
+  xlab("Estimate") + ylab("Type")
+```
 
+Looking at this graph of the Estimates, we can see that chocolate has the highest contribution to a higher win percent by almost 20%. We can also see that the crispedricewafer, fruity, and peanutyalmondy also had a higher contribution than others. Candy that is hard is the least favorite characteristic. This data can be helpful for those wondering what kids would like on Halloween, or even for a business looking to enter into the candy industry.
+
+#Conclusion
+
+ggplot was simple to use and there was plenty of helpful information on the internet. I would recommend ggplot for those that are just starting to get familiar with R and statistical analysis. It is not overly complicated and can help create helpful, good looking graphs. It does not have many intuitive tools as compared to other graphics packages in R, however, makes up for this lack in its simplicity and its ability to be user friendly.
