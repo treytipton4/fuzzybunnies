@@ -42,6 +42,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Candy_Vignette.html">Candy Vignette</a>
+    <a class="dropdown-item" href="../articles/diamond_vignette.html">Diamond Data</a>
     <a class="dropdown-item" href="../articles/fuzzybunnies_vignette.html">fuzzybunnies</a>
     <a class="dropdown-item" href="../articles/trey-graphics-package.html">trey-graphics-package</a>
   </div>
@@ -78,32 +79,15 @@ VanVeldhuisen</h4>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">fuzzybunnies</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Attaching packages</span> ─────────────────────────────────────── tidyverse 1.3.2 ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2</span> 3.4.0      <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr  </span> 1.0.1 </span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2</span> 3.4.0      <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr  </span> 1.0.0 </span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble </span> 3.1.8      <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">dplyr  </span> 1.0.10</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tidyr  </span> 1.2.1      <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">stringr</span> 1.5.0 </span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">readr  </span> 2.1.3      <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">forcats</span> 0.5.2 </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">stats</span>::filter()</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">lag()</span>    masks <span style="color: #0000BB;">stats</span>::lag()</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
-<div class="section level2">
-<h2 id="how-to-use-the-fuzzybunnies">How to use the fuzzybunnies<a class="anchor" aria-label="anchor" href="#how-to-use-the-fuzzybunnies"></a>
-</h2>
-<p>This R package contains a function called df_apply that expects a
-dataframe, a function, and a filter, like so: df_apply(.data, .fun,
-.filter, …).</p>
-<p><fuzzybunnies> is useful if you would like to perform an R command
-and apply it to one or multiple columns of a data frame. You can also
-filter the dataframe for only columns you would like to perform the
-command on. For example, if you want to round all of the numbers in your
-data frame but you also have columns with strings (thus you only want to
-apply the round function to numeric columns), you would do something
-like this: df_apply(your_data, round, is.numeric).</fuzzybunnies></p>
-<p>The (…) in the function allows you to input the rest of the .fun
-expectations if you wish to; for the example above, if you wanted to
-round to two digits, you would do this: df_apply(your_data, round,
-is.numeric, digits = 2).</p>
-</div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/" class="external-link">broom</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="vignette-using-the-dataframe-candydata">Vignette using the dataframe candydata<a class="anchor" aria-label="anchor" href="#vignette-using-the-dataframe-candydata"></a>
 </h2>
@@ -117,7 +101,6 @@ is.numeric, digits = 2).</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
-<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">candydata</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 13</span></span></span>
 <span><span class="co">#&gt;   competitor…¹ choco…² fruity caramel peanu…³ nougat crisp…⁴  hard   bar pluri…⁵</span></span>
@@ -151,18 +134,23 @@ kind of aesthetic you are looking for.</p>
 <span><span class="va">acsendwin</span> <span class="op">&lt;-</span> <span class="va">candydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">winpercent</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
+<span><span class="co">#Create Top 10 Candies Bar Chart  </span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">acsendwin</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">competitorname</span>, y<span class="op">=</span><span class="va">winpercent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"Identity"</span>, fill <span class="op">=</span> <span class="st">"Blue"</span><span class="op">)</span><span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Candy_Vignette_files/figure-html/unnamed-chunk-4-1.png" width="700">
-From this barchart, we can tell that Reese’s Peanut Butter Cup is the
-most favorite Halloween Candy according to this study. #Basic Regression
-Analysis Does the sugar content in the candy have any relation with the
-win percent? Here we can do linear regression to tell us if there is a
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Candy Type"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Win Percent"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Top 10 Candies"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Candy_Vignette_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<p>From this bar chart, we can tell that Reese’s Peanut Butter Cup is
+the most favorite Halloween Candy according to this study.</p>
+<p>#Basic Regression Analysis</p>
+<p>Does the sugar content in the candy have any relation with the win
+percent? Here we can do linear regression to tell us if there is a
 relationship between the two.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sugartest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">winpercent</span> <span class="op">~</span> <span class="va">sugarpercent</span>, data <span class="op">=</span> <span class="va">candydata</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co">#Create the Model</span></span>
+<span><span class="va">sugartest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">winpercent</span> <span class="op">~</span> <span class="va">sugarpercent</span>, data <span class="op">=</span> <span class="va">candydata</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">sugartest</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call:</span></span>
@@ -182,21 +170,70 @@ relationship between the two.</p>
 <span><span class="co">#&gt; Residual standard error: 14.41 on 83 degrees of freedom</span></span>
 <span><span class="co">#&gt; Multiple R-squared:  0.05251,    Adjusted R-squared:  0.04109 </span></span>
 <span><span class="co">#&gt; F-statistic:   4.6 on 1 and 83 DF,  p-value: 0.0349</span></span>
+<span></span>
+<span><span class="co">#Plot the Model</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">candydata</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">sugarpercent</span>, <span class="va">winpercent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>method<span class="op">=</span><span class="st">'lm'</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>method<span class="op">=</span><span class="st">'lm'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Sugar Percent"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Win Percent"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Regression"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using formula = 'y ~ x'</span></span></code></pre></div>
-<p><img src="Candy_Vignette_files/figure-html/unnamed-chunk-5-1.png" width="700">
-For this model we will use a significance value of p = 0.05 and a null
-hypothesis that there is no relationship between sugar content and win
-percent. Looking at the results of this model and a p-value of 0.0349,
-we can reject the null hypothesis and claim these two variables do have
-a relationship. However, looking at the multiple R-squared and the
-corresponding graph, we can see that this model has a lot of variability
-around the regression line and sugar content is not explaining the
-variance in the dependent variable. With this, we can add more variables
-to the model to see which ones contribute the most to having the highest
-win percentage.</p>
+<p><img src="Candy_Vignette_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<p>For this model we will use a significance value of p = 0.05 and a
+null hypothesis that there is no relationship between sugar content and
+win percent. Looking at the results of this model and a p-value of
+0.0349, we can reject the null hypothesis and claim these two variables
+do have a relationship. However, looking at the multiple R-squared and
+the corresponding graph, we can see that this model has a lot of
+variability around the regression line and sugar content is not
+explaining the variance in the dependent variable. With this, we can add
+more variables to the model to see which ones contribute the most to
+having the highest win percentage.</p>
+<p>#Seeing Which Characteristic Have the most Effect</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#Create the New Model with Extra Variables</span></span>
+<span><span class="va">sigtest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">winpercent</span> <span class="op">~</span> <span class="va">sugarpercent</span> <span class="op">+</span> <span class="va">chocolate</span> <span class="op">+</span> <span class="va">fruity</span> <span class="op">+</span> <span class="va">caramel</span> <span class="op">+</span> <span class="va">peanutyalmondy</span> <span class="op">+</span> <span class="va">nougat</span> <span class="op">+</span> <span class="va">crispedricewafer</span> <span class="op">+</span> <span class="va">hard</span> <span class="op">+</span> <span class="va">bar</span> <span class="op">+</span> <span class="va">pluribus</span>, data <span class="op">=</span> <span class="va">candydata</span><span class="op">)</span></span>
+<span><span class="va">coef</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">sigtest</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">coef</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 11 × 7</span></span></span>
+<span><span class="co">#&gt;    term             estimate std.error statistic  p.value conf.low conf.high</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> (Intercept)         33.3       4.16     8.00  1.31<span style="color: #949494;">e</span><span style="color: #BB0000;">-11</span>    25.1     41.4  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> sugarpercent         7.49      4.42     1.69  9.44<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>    -<span style="color: #BB0000;">1.18</span>    16.2  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> chocolate           19.2       3.87     4.96  4.30<span style="color: #949494;">e</span><span style="color: #BB0000;">- 6</span>    11.6     26.8  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> fruity               9.59      3.76     2.55  1.29<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>     2.21    17.0  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> caramel              1.98      3.65     0.542 5.89<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>    -<span style="color: #BB0000;">5.18</span>     9.14 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> peanutyalmondy       9.45      3.57     2.65  9.96<span style="color: #949494;">e</span><span style="color: #BB0000;">- 3</span>     2.45    16.5  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> nougat               1.92      5.63     0.341 7.34<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>    -<span style="color: #BB0000;">9.11</span>    12.9  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> crispedricewafer     8.64      5.27     1.64  1.05<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>    -<span style="color: #BB0000;">1.69</span>    19.0  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> hard                -<span style="color: #BB0000;">5.87</span>      3.45    -<span style="color: #BB0000;">1.70</span>  9.31<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>   -<span style="color: #BB0000;">12.6</span>      0.891</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> bar                 -<span style="color: #BB0000;">1.23</span>      4.82    -<span style="color: #BB0000;">0.256</span> 7.99<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>   -<span style="color: #BB0000;">10.7</span>      8.21 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> pluribus            -<span style="color: #BB0000;">1.15</span>      3.03    -<span style="color: #BB0000;">0.378</span> 7.06<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>    -<span style="color: #BB0000;">7.09</span>     4.79</span></span>
+<span></span>
+<span><span class="co">#Plot the New Model</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">coef</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">term</span>, <span class="va">estimate</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html" class="external-link">geom_pointrange</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">conf.low</span>, ymax <span class="op">=</span> <span class="va">conf.high</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Value Added to Win"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_grey.html" class="external-link">scale_fill_grey</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Estimate"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Type"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Candy_Vignette_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p>Looking at this graph of the Estimates, we can see that chocolate has
+the highest contribution to a higher win percent by almost 20%. We can
+also see that the crispedricewafer, fruity, and peanutyalmondy also had
+a higher contribution than others. Candy that is hard is the least
+favorite characteristic. This data can be helpful for those wondering
+what kids would like on Halloween, or even for a business looking to
+enter into the candy industry.</p>
+<p>#Conclusion</p>
+<p>ggplot was simple to use and there was plenty of helpful information
+on the internet. I would recommend ggplot for those that are just
+starting to get familiar with R and statistical analysis. It is not
+overly complicated and can help create helpful, good looking graphs. It
+does not have many intuitive tools as compared to other graphics
+packages in R, however, makes up for this lack in its simplicity and its
+ability to be user friendly.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
